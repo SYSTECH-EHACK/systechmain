@@ -64,7 +64,7 @@
             border-color: var(--neon-blue);
         }
 
-        .popup, .popup2 {
+        .popup, .popup2, .popup3, .help-box {
             position: fixed;
             top: 50%;
             left: 50%;
@@ -79,11 +79,11 @@
             width: 40%;
         }
 
-        .popup.visible, .popup2.visible {
+        .popup.visible, .popup2.visible, .popup3.visible, .help-box.visible {
             display: block;
         }
 
-        .overlay, .overlay2 {
+        .overlay, .overlay2, .overlay3, .overlay-help {
             position: fixed;
             top: 0;
             left: 0;
@@ -94,13 +94,13 @@
             display: none;
         }
 
-        .overlay.visible, .overlay2.visible {
+        .overlay.visible, .overlay2.visible, .overlay3.visible, .overlay-help.visible {
             display: block;
         }
 
         /* Mobile view adjustments */
         @media (max-width: 768px) {
-            .popup, .popup2 {
+            .popup, .popup2, .popup3, .help-box {
                 width: 80%;
                 padding: 1.5rem;
             }
@@ -123,23 +123,32 @@
         </div>
     </header>
 
-
-
     <!-- CTF Section -->
     <div class="container py-5">
         <h2 class="text-center mb-5">Available CTF Challenges</h2>
         <div class="row">
             <div class="col-md-4">
                 <div class="ctf-card">
+                    <h4>Contest 1: Steganography</h4>
+                    <h3>Steganography</h3>
+                    <p>Level: Intermediate</p>
+                    <p>Status: <span class="text-success">Live</span></p>
+                    <button class="btn btn-primary start-btn3">Start Challenge</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="ctf-card">
+                    <h4>Contest 2: Networking</h4>
                     <h3>Wireshark Challenge</h3>
-                    <p>Level: basic</p>
+                    <p>Level: Easy</p>
                     <p>Status: <span class="text-success">Live</span></p>
                     <button class="btn btn-primary start-btn">Start Challenge</button>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="ctf-card">
-                    <h3>Cryptography Basics</h3>
+                    <h4>Contest 3: Cryptography</h4>
+                    <h3>Cryptography</h3>
                     <p>Level: Intermediate</p>
                     <p>Status: <span class="text-success">Live</span></p>
                     <button class="btn btn-primary start-btn2">Start Challenge</button>
@@ -148,7 +157,36 @@
         </div>
     </div>
 
-    <!-- Popup 1 -->
+    <!-- Help Box (New Feature) -->
+    <div class="overlay-help"></div>
+    <div class="help-box">
+        <h3>Help</h3>
+        <p>If you are facing any issues with the challenges, please follow the instructions below:</p>
+        <ul>
+            <li>Ensure that you have the necessary tools (e.g., Wireshark, Python, etc.) installed.</li>
+            <li>If the download links do not work, contact us at <a href="mailto:contact@systechgroup.in">contact@systechgroup.in</a>.</li>
+            <li><h5>Note:</h5>If the CTF has ended, you are still able to complete the challenge. However, you can only submit the flag if the challenge is still active.</li>
+            <li><strong>All the best!</strong></li>
+              
+        </ul>
+        <button class="btn btn-primary close-help-box">Close Help</button>
+    </div>
+
+    <!-- Popup 1 (Steganography) -->
+    <div class="overlay3"></div>
+    <div class="popup3">
+        <h3>Steganography Challenge Rules</h3>
+        <ul>
+            <li>Look for hidden messages within an image file.</li>
+            <li>Decrypt the hidden message and find the flag.</li>
+            <li>Submit the flag.</li>
+        </ul>
+        <p><strong>Note:</strong> Use VirtualBox for setting up the required environment.</p>        
+        <a href="https://systech2024trichy.s3.us-east-1.amazonaws.com/Contest1.zip" class="btn btn-primary" download>Download OVA File</a>
+        <button class="btn btn-secondary close-popup3">Close</button>
+    </div>
+
+    <!-- Popup 2 (Wireshark) -->
     <div class="overlay"></div>
     <div class="popup">
         <h3>Wireshark Challenge Rules</h3>
@@ -163,12 +201,13 @@
         <button class="btn btn-secondary close-popup">Close</button>
     </div>
 
-    <!-- Popup 2 -->
+    <!-- Popup 3 (Cryptography) -->
     <div class="overlay2"></div>
     <div class="popup2">
         <h3>Cryptography Challenge Rules</h3>
         <ul>
             <li>Figure out the secret folder name to get the flag.</li>
+            <li>Dm the flag in instagram</li>
         </ul>
       <a href="http://contest3.systechcontest.com" class="btn btn-primary">Start Your Challenge</a>
         <button class="btn btn-secondary close-popup2">Close</button>
@@ -182,6 +221,28 @@
     </footer>
 
     <script>
+        const startButtons3 = document.querySelectorAll('.start-btn3');
+        const popup3 = document.querySelector('.popup3');
+        const overlay3 = document.querySelector('.overlay3');
+        const closePopupButton3 = document.querySelector('.close-popup3');
+
+        startButtons3.forEach(button => {
+            button.addEventListener('click', () => {
+                popup3.classList.add('visible');
+                overlay3.classList.add('visible');
+            });
+        });
+
+        closePopupButton3.addEventListener('click', () => {
+            popup3.classList.remove('visible');
+            overlay3.classList.remove('visible');
+        });
+
+        overlay3.addEventListener('click', () => {
+            popup3.classList.remove('visible');
+            overlay3.classList.remove('visible');
+        });
+
         const startButtons = document.querySelectorAll('.start-btn');
         const popup = document.querySelector('.popup');
         const overlay = document.querySelector('.overlay');
@@ -224,6 +285,31 @@
         overlay2.addEventListener('click', () => {
             popup2.classList.remove('visible');
             overlay2.classList.remove('visible');
+        });
+
+        // Help Box script
+        const helpBoxButton = document.createElement('button');
+        helpBoxButton.classList.add('btn', 'btn-outline-light');
+        helpBoxButton.innerText = 'Need Help?';
+        document.querySelector('.container').append(helpBoxButton);
+
+        const helpBox = document.querySelector('.help-box');
+        const overlayHelp = document.querySelector('.overlay-help');
+        const closeHelpBoxButton = document.querySelector('.close-help-box');
+
+        helpBoxButton.addEventListener('click', () => {
+            helpBox.classList.add('visible');
+            overlayHelp.classList.add('visible');
+        });
+
+        closeHelpBoxButton.addEventListener('click', () => {
+            helpBox.classList.remove('visible');
+            overlayHelp.classList.remove('visible');
+        });
+
+        overlayHelp.addEventListener('click', () => {
+            helpBox.classList.remove('visible');
+            overlayHelp.classList.remove('visible');
         });
     </script>
 </body>
