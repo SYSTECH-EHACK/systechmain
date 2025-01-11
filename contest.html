@@ -104,6 +104,24 @@
                 padding: 1.5rem;
             }
         }
+        .announcement-banner {
+    background-color: #7000FF;
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+
+.announcement-banner .close-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
     </style>
 </head>
 <body>
@@ -120,7 +138,12 @@
             </div>
         </div>
     </header>
-
+    <div id="announcement-banner" class="announcement-banner">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span><strong>🎉 CTF Contest 4 (Forensics) is Coming Soon! Stay Tuned! 🎉</strong></span>
+            <button class="close-btn" onclick="closeBanner()">X</button>
+        </div>
+    </div> 
 <div class="container py-5">
     <h2 class="text-center mb-5">Available CTF Challenges</h2>
     <div class="row">
@@ -220,8 +243,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container text-center">
-            <p>© 2024 SYSTECH CTF. All rights reserved.</p>
-        </div>
+            <p>© 2025 SYSTECH CTF. All rights are reserved. This website's content may not be duplicated, distributed, or transmitted in any way. Unauthorized usage is strictly prohibited.</p>        </div>
     </footer>
 
     <script>
@@ -315,6 +337,9 @@
             helpBox.classList.remove('visible');
             overlayHelp.classList.remove('visible');
         });
+        function closeBanner() {
+        document.getElementById('announcement-banner').style.display = 'none';
+    }
     </script>
 </body>
 </html>
