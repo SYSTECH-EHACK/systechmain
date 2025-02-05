@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +64,7 @@
             border-color: var(--neon-blue);
         }
 
-        .popup, .popup2, .popup3, .popup4, .help-box {
+        .popup, .popup2, .popup3, .popup4, .popup5, .help-box {
             position: fixed;
             top: 50%;
             left: 50%;
@@ -80,11 +79,11 @@
             width: 40%;
         }
 
-        .popup.visible, .popup2.visible, .popup3.visible, .popup4.visible, .help-box.visible {
+        .popup.visible, .popup2.visible, .popup3.visible, .popup4.visible, .popup5.visible, .help-box.visible {
             display: block;
         }
 
-        .overlay, .overlay2, .overlay3, .overlay4, .overlay-help {
+        .overlay, .overlay2, .overlay3, .overlay4, .overlay5, .overlay-help {
             position: fixed;
             top: 0;
             left: 0;
@@ -95,12 +94,12 @@
             display: none;
         }
 
-        .overlay.visible, .overlay2.visible, .overlay3.visible, .overlay4.visible, .overlay-help.visible {
+        .overlay.visible, .overlay2.visible, .overlay3.visible, .overlay4.visible, .overlay5.visible, .overlay-help.visible {
             display: block;
         }
 
         @media (max-width: 768px) {
-            .popup, .popup2, .popup3, .popup4, .help-box {
+            .popup, .popup2, .popup3, .popup4, .popup5, .help-box {
                 width: 80%;
                 padding: 1.5rem;
             }
@@ -142,7 +141,7 @@
     </header>
     <div id="announcement-banner" class="announcement-banner">
         <div class="container d-flex justify-content-between align-items-center">
-            <span><strong>🎉 CTF Contest 4 (Forensics) is Live</strong></span>
+            <span><strong>🎉 CTF Contest 5 (Networking) is Comeing Soon</strong></span>
             <button class="close-btn" onclick="closeBanner()">X</button>
         </div>
     </div>    
@@ -186,8 +185,16 @@
                 <button class="btn btn-primary start-btn4" >Start Challenge</button>
             </div>
         </div>
+        <div class="col-md-5">
+            <div class="ctf-card">
+                <h4>Contest 5: Networking</h4>
+                <h3>Networking Challenge</h3>
+                <p>Level: Intermediate</p>
+                <p>Status: <span class="text-warning">upcoming</span></p>
+                <button class="btn btn-primary start-btn5" disabled>Start Challenge</button>
+            </div>
+        </div>
     </div>
-</div>
 
     <div class="overlay-help"></div>
     <div class="help-box">
@@ -250,6 +257,17 @@
         </ul>
         <a href="/file.zip" class="btn btn-primary" download>Download File</a>
         <button class="btn btn-secondary close-popup4">Close</button>
+    </div>
+
+    <div class="overlay5"></div>
+    <div class="popup5">
+        <h3>Networking Challenge Rules</h3>
+        <ul>
+            <li>Find The Hidden Conversations</li>
+            <li>Dm the flag in instagram</li>
+        </ul>
+        <a href="/wireshark1.pcap" class="btn btn-primary" download>Download File</a>
+        <button class="btn btn-secondary close-popup5">Close</button>
     </div>
 
 
@@ -347,6 +365,28 @@
             popup4.classList.remove('visible');
             overlay4.classList.remove('visible');
         });        
+
+        const startButtons5 = document.querySelectorAll('.start-btn5');
+        const popup5 = document.querySelector('.popup5');
+        const overlay5 = document.querySelector('.overlay5');
+        const closePopupButton5 = document.querySelector('.close-popup5');
+
+        startButtons5.forEach(button => {
+            button.addEventListener('click', () => {
+                popup5.classList.add('visible');
+                overlay5.classList.add('visible');
+            });
+        });
+
+        closePopupButton5.addEventListener('click', () => {
+            popup5.classList.remove('visible');
+            overlay5.classList.remove('visible');
+        });
+
+        overlay5.addEventListener('click', () => {
+            popup5.classList.remove('visible');
+            overlay5.classList.remove('visible');
+        });
 
         const helpBoxButton = document.createElement('button');
         helpBoxButton.classList.add('btn', 'btn-outline-light');
